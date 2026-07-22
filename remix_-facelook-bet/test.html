@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .wrapper { position: relative; width: 200px; height: 500px; border: 1px solid black; margin-left: 500px;}
+  .resizable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    min-width: 200px;
+    height: 100%;
+    background: #f0f0f0;
+    direction: rtl;
+    resize: horizontal;
+    overflow: auto;
+    border: 1px solid red;
+  }
+  .content { direction: ltr; }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="resizable">
+      <div class="content">Hello World</div>
+    </div>
+  </div>
+</body>
+</html>

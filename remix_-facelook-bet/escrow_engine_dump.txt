@@ -1,0 +1,811 @@
+
+            {/* Tab Switcher */}
+            <div className="flex border-b border-gray-150 dark:border-zinc-800 mb-4 text-[10px] sm:text-[11px] font-bold font-sans">
+              <button
+                type="button"
+                onClick={() => setEscrowEngineTab("mimi")}
+                className={`flex-1 pb-2 text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                  escrowEngineTab === "mimi"
+                    ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700"
+                }`}
+              >
+                <div className="flex items-center gap-1"><span className="text-sm">👤</span> <span className="hidden sm:inline">Mimi na wewe</span></div>
+                <span className="text-[8px] font-normal text-gray-400">Challenge (1 vs 1)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setEscrowEngineTab("three_way")}
+                className={`flex-1 pb-2 text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                  escrowEngineTab === "three_way"
+                    ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700"
+                }`}
+              >
+                <div className="flex items-center gap-1"><span className="text-sm">🔺</span> <span className="hidden sm:inline">3-Way Challenge</span></div>
+                <span className="text-[8px] font-normal text-gray-400">(3 Players)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setEscrowEngineTab("tujengane")}
+                className={`flex-1 pb-2 text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                  escrowEngineTab === "tujengane"
+                    ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700"
+                }`}
+              >
+                <div className="flex items-center gap-1"><span className="text-sm">🤝</span> <span className="hidden sm:inline">Tujengane</span></div>
+                <span className="text-[8px] font-normal text-gray-400">Group Challenge</span>
+              </button>
+            </div>
+
+            {escrowEngineTab === "tujengane" ? (
+              <div className="space-y-4 animate-in fade-in duration-300 font-sans pb-16 relative">
+                
+                {/* Floating AI Button */}
+                <button onClick={() => window.alert("Nyota Natural Language AI opened! You can say things like 'Find contributors' or 'Merge similar pools'...")} className="absolute bottom-4 right-4 z-10 bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30 rounded-full py-2.5 px-4 flex items-center gap-2 font-bold text-[10px] transition-transform hover:scale-105 border border-indigo-400/50 backdrop-blur-md cursor-pointer">
+                  <span className="text-sm">✨</span> Ask Nyota
+                </button>
+
+                {ratioOddValue > 0 ? (
+                  <div className="space-y-3">
+                    
+                    {/* Header Section */}
+                    <div className="p-3 bg-gradient-to-br from-[#111827] to-[#1e1b4b] rounded-2xl border border-indigo-500/30 shadow-xl overflow-hidden relative">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                      
+                      <div className="flex justify-between items-start mb-3 relative z-10">
+                        <div>
+                          <h2 className="text-lg font-black text-white flex items-center gap-2 tracking-tight">
+                            🤝 Tujengane AI
+                          </h2>
+                          <p className="text-[9px] font-bold text-indigo-300 tracking-widest uppercase mt-1">
+                            Build Together • Smart Escrow • AI Matched
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-black/40 border border-emerald-500/30 px-2 py-1 rounded-full shadow-inner">
+                          <div className={`w-1.5 h-1.5 rounded-full ${tujenganeNyotaStatus === "Online" ? "bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" : tujenganeNyotaStatus === "Connecting" ? "bg-amber-400 animate-pulse" : "bg-rose-500"}`}></div>
+                          <span className={`text-[8px] font-bold tracking-wider uppercase ${tujenganeNyotaStatus === "Online" ? "text-emerald-400" : tujenganeNyotaStatus === "Connecting" ? "text-amber-400" : "text-rose-500"}`}>Nyota {tujenganeNyotaStatus}</span>
+                        </div>
+                      </div>
+
+                      {/* Match Information Card */}
+                      <div className="bg-white/5 backdrop-blur-md rounded-xl p-3 border border-white/10 mt-3 relative z-10 ">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-[9px] text-gray-300 font-bold bg-black/30 px-2 py-0.5 rounded uppercase">{ratioMatch?.league || "Premier League"}</span>
+                          <span className="text-[9px] text-indigo-200 font-mono bg-indigo-500/20 border border-indigo-500/30 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            ⏱️ 02:14:36
+                          </span>
+                        </div>
+                        <div className="text-white font-black text-sm truncate mb-2">
+                          {ratioMatch?.homeTeam} <span className="text-gray-400 font-medium px-1">vs</span> {ratioMatch?.awayTeam}
+                        </div>
+                        <div className="flex justify-between items-end">
+                          <div>
+                            <div className="text-[8px] text-gray-400 uppercase font-bold mb-0.5">Prediction</div>
+                            <div className="text-emerald-400 font-black text-xs">{ratioOddName}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-[8px] text-gray-400 uppercase font-bold mb-0.5">Live Odds</div>
+                            <div className="text-white font-mono font-bold text-xs bg-white/10 px-2 py-0.5 rounded">@{ratioOddValue.toFixed(2)}</div>
+                          </div>
+                          <div>
+                            <div className="text-[8px] text-gray-400 uppercase font-bold mb-0.5">Risk</div>
+                            <div className="text-amber-400 font-bold text-[9px] border border-amber-400/30 bg-amber-400/10 px-1.5 py-0.5 rounded">High Opportunity</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Escrow Contract Card */}
+                    <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm space-y-3 ">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-extrabold text-gray-800 dark:text-gray-200 uppercase tracking-wider">Escrow Contract</span>
+                        <span className={`text-[9px] px-2 py-0.5 rounded font-bold border transition-all ${
+                          escrowLiveStatus === "Waiting for Opponent" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-800/50" :
+                          escrowLiveStatus === "Opponent Found" ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/50" :
+                          escrowLiveStatus === "Escrow Locked" ? "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-800/50" :
+                          escrowLiveStatus === "Match In Progress" ? "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-800/50 animate-pulse" :
+                          "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/50"
+                        }`}>
+                          {escrowLiveStatus}
+                        </span>
+                      </div>
+                      
+                      <div className="mb-2">
+                        <label className="text-[8px] text-gray-400 font-bold uppercase block mb-1">Total Contract Value ($)</label>
+                        <input
+                          type="number"
+                          value={ratioTotalPool}
+                          onChange={(e) => {
+                            const val = Math.max(1, parseFloat(e.target.value) || 0);
+                            setRatioTotalPool(val);
+                            setCalculatorMode("contract");
+                          }}
+                          className="w-full bg-gray-50 dark:bg-[#111111] border border-gray-200 dark:border-zinc-800 rounded-lg p-2 font-bold font-mono text-center text-sm text-gray-900 dark:text-white outline-none focus:border-blue-500"
+                        />
+                      </div>
+                      
+                      {(() => {
+                        const calc = getCentralCalculation();
+                        const poolStake = ratioOddName === "1" ? calc.player1Stake : ratioOddName === "X" ? calc.player2Stake : calc.player3Stake;
+                        const opp1Stake = ratioOddName === "1" ? calc.player2Stake : ratioOddName === "X" ? calc.player1Stake : calc.player1Stake;
+                        const opp2Stake = ratioOddName === "1" ? calc.player3Stake : ratioOddName === "X" ? calc.player3Stake : calc.player2Stake;
+                        
+                        const opp1Name = ratioOddName === "1" ? "Draw" : ratioOddName === "X" ? "Home" : "Home";
+                        const opp2Name = ratioOddName === "1" ? "Away" : ratioOddName === "X" ? "Away" : "Draw";
+
+                        const membersRequired = Math.max(1, tujenganeMinContrib); // Using Min Contributors as Members Required
+                        const activeMembers = Math.max(tujenganeMembersJoined, membersRequired);
+                        const amountPerMember = poolStake / activeMembers;
+                        const groupFunded = tujenganeMembersJoined * amountPerMember;
+                        const groupRemaining = Math.max(0, poolStake - groupFunded);
+                        
+                        return (
+                          <div className="space-y-3">
+                            <div className="grid grid-cols-3 gap-2 border-y border-gray-100 dark:border-zinc-800 py-2">
+                               <div className="text-center">
+                                 <div className="text-[8px] font-bold text-gray-500 uppercase">Pool Target</div>
+                                 <div className="text-[11px] font-black text-blue-600 dark:text-blue-400">${poolStake.toFixed(2)}</div>
+                               </div>
+                               <div className="text-center border-l border-gray-100 dark:border-zinc-800">
+                                 <div className="text-[8px] font-bold text-gray-500 uppercase">Opp 1 ({opp1Name})</div>
+                                 <div className="text-[11px] font-black text-gray-800 dark:text-gray-200">${opp1Stake.toFixed(2)}</div>
+                               </div>
+                               <div className="text-center border-l border-gray-100 dark:border-zinc-800">
+                                 <div className="text-[8px] font-bold text-gray-500 uppercase">Opp 2 ({opp2Name})</div>
+                                 <div className="text-[11px] font-black text-gray-800 dark:text-gray-200">${opp2Stake.toFixed(2)}</div>
+                               </div>
+                            </div>
+                            
+                            <div className="bg-gray-50 dark:bg-[#111111] p-2 rounded-lg border border-gray-100 dark:border-zinc-800">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="text-[9px] text-gray-600 dark:text-gray-400 font-bold uppercase">Funding Progress</span>
+                                <span className="text-[9px] text-emerald-600 dark:text-emerald-400 font-mono font-bold">${groupFunded.toFixed(2)} / ${poolStake.toFixed(2)}</span>
+                              </div>
+                              <div className="h-2 w-full bg-gray-200 dark:bg-zinc-800 rounded-full overflow-hidden mb-2">
+                                <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full relative" style={{ width: `${Math.min(100, poolStake > 0 ? (groupFunded/poolStake)*100 : 0)}%` }}>
+                                  <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_ease-in-out_infinite]"></div>
+                                </div>
+                              </div>
+                              <div className="flex justify-between text-[8px] text-gray-500 font-medium">
+                                <div><span className="font-bold text-gray-800 dark:text-gray-200">{tujenganeMembersJoined} / {membersRequired}</span> Members Joined</div>
+                                <div><span className="font-bold text-gray-800 dark:text-gray-200">${amountPerMember.toFixed(2)}</span> Per Member</div>
+                              </div>
+                              <div className="text-right text-[8px] text-gray-500 mt-1">
+                                Remaining to fund: <span className="font-bold text-rose-500">${groupRemaining.toFixed(2)}</span>
+                              </div>
+                            </div>
+                            
+                            {/* Calculation Breakdown (Fee) */}
+                            <div className="pt-1 text-[8.5px] text-gray-500 space-y-1">
+                               <div className="flex justify-between">
+                                 <span>Total Fee (split equally)</span>
+                                 <span>${calc.escrowFee.toFixed(2)}</span>
+                               </div>
+                               <div className="flex justify-between font-bold text-emerald-600 dark:text-emerald-400">
+                                 <span>Total Winner Payout</span>
+                                 <span>${calc.escrowLockValue.toFixed(2)}</span>
+                               </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </div>
+
+                    {/* AI Liquidity Card */}
+                    <div className="bg-gradient-to-br from-indigo-50 dark:from-indigo-950/20 to-purple-50 dark:to-purple-950/20 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-900/30">
+                      <h3 className="text-[10px] font-black text-indigo-800 dark:text-indigo-300 flex items-center gap-1.5 uppercase tracking-wider mb-3">
+                        <span>🧠</span> Nyota Liquidity Engine
+                      </h3>
+                      
+                      <div className="grid grid-cols-2 gap-2 mb-3">
+                        <div className="bg-white/60 dark:bg-[#18191a]/60 backdrop-blur-sm p-2 rounded-xl border border-white/40 dark:border-zinc-800/50">
+                          <div className="text-[8px] text-gray-500 uppercase font-bold mb-0.5">Compatible Contributors</div>
+                          <div className="text-indigo-600 dark:text-indigo-400 font-black text-xs">{tujenganeAICandidates} Found</div>
+                        </div>
+                        <div className="bg-white/60 dark:bg-[#18191a]/60 backdrop-blur-sm p-2 rounded-xl border border-white/40 dark:border-zinc-800/50">
+                          <div className="text-[8px] text-gray-500 uppercase font-bold mb-0.5">Likely Funding Time</div>
+                          <div className="text-gray-800 dark:text-gray-200 font-black text-xs">{tujenganeEstTime}</div>
+                        </div>
+                        <div className="bg-white/60 dark:bg-[#18191a]/60 backdrop-blur-sm p-2 rounded-xl border border-white/40 dark:border-zinc-800/50">
+                          <div className="text-[8px] text-gray-500 uppercase font-bold mb-0.5">Liquidity Score</div>
+                          <div className="text-emerald-600 dark:text-emerald-400 font-black text-xs">{tujenganeLiquidityScore}%</div>
+                        </div>
+                        <div className="bg-white/60 dark:bg-[#18191a]/60 backdrop-blur-sm p-2 rounded-xl border border-white/40 dark:border-zinc-800/50">
+                          <div className="text-[8px] text-gray-500 uppercase font-bold mb-0.5">Community Interest</div>
+                          <div className="text-rose-500 dark:text-rose-400 font-black text-xs">{tujenganeCommunityInterest}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <button 
+                          onClick={() => {
+                            setTujenganeNyotaStatus("Searching");
+                            setIsTujenganeSearching(true);
+                            window.alert("Nyota is actively scanning global users, friends, and clans for matching liquidity.");
+                          }}
+                          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[9px] font-bold py-1.5 rounded-lg shadow-sm transition-colors cursor-pointer"
+                        >
+                          {isTujenganeSearching ? "🤖 Searching..." : "🤖 Start Nyota Search"}
+                        </button>
+                        <button 
+                          onClick={() => window.alert("Pool posted to Global Feed! Your pool will now rank 42% higher in the Recommended sections.")}
+                          className="flex-1 bg-white dark:bg-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-700 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-900/50 text-[9px] font-bold py-1.5 rounded-lg shadow-sm transition-colors cursor-pointer"
+                        >
+                          📢 Post to Global Feed
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Contribution Rules & Auto Matchmaking (Side by side on wider screens, stacked on small) */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Contribution Rules */}
+                      <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm ">
+                        <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-2">Contribution Rules</h3>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-[9px]">
+                            <span className="text-gray-500">Min Contribution</span>
+                            <div className="flex items-center gap-1 font-mono font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-[#111111] border border-gray-200 dark:border-zinc-800 rounded px-1.5 py-0.5">
+                              <span>$</span>
+                              <input 
+                                type="number" 
+                                value={tujenganeMinContrib} 
+                                onChange={(e) => setTujenganeMinContrib(Math.max(1, parseInt(e.target.value) || 0))}
+                                className="w-8 bg-transparent outline-none text-center" 
+                              />
+                            </div>
+                          </div>
+                          <div className="flex justify-between items-center text-[9px]">
+                            <span className="text-gray-500">Max Contribution</span>
+                            <div className="flex items-center gap-1 font-mono font-bold text-gray-900 dark:text-white bg-gray-50 dark:bg-[#111111] border border-gray-200 dark:border-zinc-800 rounded px-1.5 py-0.5">
+                              <span>$</span>
+                              <input 
+                                type="number" 
+                                value={tujenganeMaxContrib} 
+                                onChange={(e) => setTujenganeMaxContrib(Math.max(1, parseInt(e.target.value) || 0))}
+                                className="w-8 bg-transparent outline-none text-center" 
+                              />
+                            </div>
+                          </div>
+                          <div className="pt-2 border-t border-gray-100 dark:border-zinc-800 space-y-1.5">
+                            {['Public', 'Friends', 'Clan', 'Global'].map((rule) => {
+                              const isSelected = tujenganeVisibility === rule;
+                              return (
+                                <button key={rule} onClick={() => setTujenganeVisibility(rule as any)} className="w-full flex justify-between items-center cursor-pointer group">
+                                  <span className="text-[9px] text-gray-600 dark:text-gray-400 font-medium group-hover:text-emerald-500 transition-colors">{rule}</span>
+                                  <div className={`w-5 h-3 rounded-full relative transition-colors ${isSelected ? 'bg-emerald-500' : 'bg-gray-200 dark:bg-zinc-700'}`}>
+                                    <div className={`absolute top-[2px] w-2 h-2 bg-white rounded-full transition-all ${isSelected ? 'right-[2px]' : 'left-[2px]'}`}></div>
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Auto Matchmaking */}
+                      <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm flex flex-col ">
+                        <div className="flex justify-between items-center mb-2">
+                          <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider">Auto Match</h3>
+                          <button onClick={() => setTujenganeAutoMatch(!tujenganeAutoMatch)} className={`text-[8px] px-1.5 py-0.5 rounded font-bold cursor-pointer transition-colors ${tujenganeAutoMatch ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-gray-100 text-gray-500 dark:bg-zinc-800 dark:text-gray-400'}`}>
+                            {tujenganeAutoMatch ? "ON" : "OFF"}
+                          </button>
+                        </div>
+                        <div className="text-[8px] text-gray-500 font-medium mb-1">{tujenganeSearchText}</div>
+                        <div className="space-y-1 mb-3 flex-grow">
+                          {['Friends', 'Clan Members', 'Similar Bettors', 'Public Community'].map(target => (
+                            <div key={target} className={`flex items-center gap-1.5 text-[8.5px] ${tujenganeAutoMatch ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 dark:text-gray-600'}`}>
+                              <span className={tujenganeAutoMatch ? 'text-emerald-500 font-bold' : 'text-gray-300 dark:text-zinc-700'}>✓</span> {target}
+                            </div>
+                          ))}
+                        </div>
+                        <button onClick={() => window.alert("Opening ranked compatible opponents candidates list...")} className="w-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-gray-200 text-[9px] font-bold py-1.5 rounded-lg transition-colors cursor-pointer">
+                          View Candidates
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Opponent Rules */}
+                    <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm ">
+                      <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-2">Opponent Challenge Rules</h3>
+                      <div className="grid grid-cols-2 gap-2 mb-2">
+                        <button 
+                          onClick={() => setTujenganeChallengeRules("Open")}
+                          className={`p-2 rounded-xl text-left border cursor-pointer transition-colors ${tujenganeChallengeRules === "Open" ? "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-400" : "bg-gray-50 dark:bg-zinc-800/50 border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-gray-400 hover:border-blue-300"}`}
+                        >
+                          <div className="text-[9px] font-bold mb-0.5">Open Challenge</div>
+                          <div className={`text-[7.5px] leading-tight ${tujenganeChallengeRules === "Open" ? "text-blue-600/70 dark:text-blue-400/70" : "text-gray-400"}`}>Opponent chooses any side</div>
+                        </button>
+                        <button 
+                          onClick={() => setTujenganeChallengeRules("Forced")}
+                          className={`p-2 rounded-xl text-left border cursor-pointer transition-colors ${tujenganeChallengeRules === "Forced" ? "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-400" : "bg-gray-50 dark:bg-zinc-800/50 border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-gray-400 hover:border-blue-300"}`}
+                        >
+                          <div className="text-[9px] font-bold mb-0.5">Forced Challenge</div>
+                          <div className={`text-[7.5px] leading-tight ${tujenganeChallengeRules === "Forced" ? "text-blue-600/70 dark:text-blue-400/70" : "text-gray-400"}`}>Opponent must take selected outcome</div>
+                        </button>
+                      </div>
+                      
+                      <button 
+                        onClick={() => setTujenganeChallengeRules("Three-Way")}
+                        className={`w-full p-2 rounded-xl border text-left cursor-pointer transition-colors ${tujenganeChallengeRules === "Three-Way" ? "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/50" : "bg-gray-50 dark:bg-zinc-800/30 border-gray-200 dark:border-zinc-800"}`}
+                      >
+                        <div className={`text-[8.5px] font-bold mb-1.5 ${tujenganeChallengeRules === "Three-Way" ? "text-blue-700 dark:text-blue-400" : "text-gray-700 dark:text-gray-300"}`}>Three-Way Challenge</div>
+                        <div className="flex gap-2">
+                          {['Home', 'Draw', 'Away'].map(opt => (
+                            <div key={opt} className={`flex-1 flex items-center justify-center gap-1 bg-white dark:bg-zinc-800 border rounded-lg py-1 ${tujenganeChallengeRules === "Three-Way" ? "border-blue-200 dark:border-blue-800" : "border-gray-200 dark:border-zinc-700"}`}>
+                              <div className={`w-2.5 h-2.5 rounded border flex items-center justify-center ${tujenganeChallengeRules === "Three-Way" ? "border-blue-300 bg-emerald-500" : "border-gray-300 dark:border-zinc-600 bg-gray-200 dark:bg-zinc-700"}`}>
+                                {tujenganeChallengeRules === "Three-Way" && <span className="text-[6px] text-white">✓</span>}
+                              </div>
+                              <span className="text-[8px] font-medium text-gray-700 dark:text-gray-300">{opt}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Tujengane Community */}
+                    <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm ">
+                      <div className="flex justify-between items-center mb-3">
+                        <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider">Tujengane Community</h3>
+                        <div className="flex -space-x-2">
+                          {[1,2,3,4].map(i => (
+                            <div key={i} className={`w-5 h-5 rounded-full border border-white dark:border-[#18191a] bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-[7px] text-white font-bold relative z-[${10-i}]`}>
+                              U{i}
+                            </div>
+                          ))}
+                          <div className="w-5 h-5 rounded-full border border-white dark:border-[#18191a] bg-gray-100 dark:bg-zinc-800 flex items-center justify-center text-[7px] text-gray-600 dark:text-gray-400 font-bold relative z-0">
+                            +2
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-2 mb-3 cursor-pointer hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 p-1 rounded-lg transition-colors" onClick={() => setTujenganeMembersJoined(prev => prev + 1)}>
+                        <div className="text-center bg-gray-50 dark:bg-zinc-800/50 rounded-lg p-1.5">
+                          <div className="text-[11px] font-black text-gray-900 dark:text-white">{tujenganeMembersJoined}</div>
+                          <div className="text-[7.5px] text-gray-500 uppercase">Contributors</div>
+                        </div>
+                        <div className="text-center bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-1.5">
+                          <div className="text-[11px] font-black text-emerald-700 dark:text-emerald-400 font-mono">${(tujenganeMembersJoined * (ratioTotalPool / Math.max(tujenganeMembersJoined, Math.max(1, tujenganeMinContrib)))).toFixed(2)}</div>
+                          <div className="text-[7.5px] text-emerald-600 dark:text-emerald-500 uppercase">Raised</div>
+                        </div>
+                        <div className="text-center bg-rose-50 dark:bg-rose-900/20 rounded-lg p-1.5">
+                          <div className="text-[11px] font-black text-rose-700 dark:text-rose-400 font-mono">${Math.max(0, ratioTotalPool - (tujenganeMembersJoined * (ratioTotalPool / Math.max(tujenganeMembersJoined, Math.max(1, tujenganeMinContrib))))).toFixed(2)}</div>
+                          <div className="text-[7.5px] text-rose-600 dark:text-rose-500 uppercase">Remaining</div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <button onClick={() => window.alert("Opening contact list to invite friends to Tujengane...")} className="flex-1 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 text-[9px] font-bold py-1.5 rounded-lg transition-colors cursor-pointer hover:bg-blue-100">
+                          👤 Invite Friend
+                        </button>
+                        <button onClick={() => window.alert("Opening Tujengane group chat. Nyota translation active.")} className="flex-1 bg-gray-50 text-gray-700 dark:bg-zinc-800/80 dark:text-gray-300 text-[9px] font-bold py-1.5 rounded-lg transition-colors cursor-pointer hover:bg-gray-200">
+                          Message
+                        </button>
+                        <button onClick={() => window.alert("Share deep link generated and copied to clipboard!")} className="flex-1 bg-gray-50 text-gray-700 dark:bg-zinc-800/80 dark:text-gray-300 text-[9px] font-bold py-1.5 rounded-lg transition-colors cursor-pointer hover:bg-gray-200">
+                          Share
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Smart Merge */}
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 p-3 rounded-2xl border border-emerald-200/50 dark:border-emerald-900/40 relative overflow-hidden">
+                      <div className="absolute -right-4 -top-4 w-16 h-16 bg-emerald-400/20 rounded-full blur-xl"></div>
+                      <div className="flex justify-between items-start mb-2 relative z-10">
+                        <div>
+                          <h3 className="text-[10px] font-black text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider">
+                            <span>⚡</span> Smart Tujengane Merge
+                          </h3>
+                          <p className="text-[8px] text-emerald-600/80 dark:text-emerald-500/80 mt-0.5 leading-tight max-w-[85%]">
+                            Nyota automatically detects compatible pools and suggests merging to increase liquidity.
+                          </p>
+                        </div>
+                        <div className="bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm ">
+                          3 Found
+                        </div>
+                      </div>
+                      <div className="flex gap-2 relative z-10">
+                        <button onClick={() => window.alert("Escrow constraints checked. Auto-merging with compatible pools...")} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold py-1.5 rounded-lg shadow-sm transition-colors cursor-pointer">
+                          Merge Automatically
+                        </button>
+                        <button onClick={() => window.alert("Opening manual pool merge suggestions review window...")} className="flex-1 bg-white/60 dark:bg-zinc-900/60 hover:bg-white dark:hover:bg-zinc-800 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 text-[9px] font-bold py-1.5 rounded-lg shadow-sm transition-colors cursor-pointer">
+                          Review Suggestions
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* AI Insights */}
+                    <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm ">
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider flex items-center gap-1">
+                          <span className="text-indigo-500">✨</span> Nyota Analysis
+                        </h3>
+                        <div className="text-amber-400 text-[8px]">★★★★★</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-[9px]">
+                        <div className="flex justify-between border-b border-gray-100 dark:border-zinc-800 pb-1">
+                          <span className="text-gray-500">Pool Confidence</span>
+                          <span className="font-bold text-emerald-500">94%</span>
+                        </div>
+                        <div className="flex justify-between border-b border-gray-100 dark:border-zinc-800 pb-1">
+                          <span className="text-gray-500">Funding Prob.</span>
+                          <span className="font-bold text-emerald-500">Very High</span>
+                        </div>
+                        <div className="flex justify-between border-b border-gray-100 dark:border-zinc-800 pb-1">
+                          <span className="text-gray-500">Expected Match</span>
+                          <span className="font-bold text-gray-900 dark:text-white">3 Minutes</span>
+                        </div>
+                        <div className="flex justify-between border-b border-gray-100 dark:border-zinc-800 pb-1">
+                          <span className="text-gray-500">Rec. Contribution</span>
+                          <span className="font-bold text-gray-900 dark:text-white">${tujenganeRecContrib}</span>
+                        </div>
+                      </div>
+                      <div className="mt-2 text-[8px] bg-indigo-50 dark:bg-indigo-950/20 text-indigo-700 dark:text-indigo-300 p-1.5 rounded-lg border border-indigo-100/50 dark:border-indigo-900/30">
+                        <strong className="font-bold">Market Trend:</strong> Draw activity increasing rapidly in the last 15 mins.
+                      </div>
+                    </div>
+
+                    {/* Footer Action Buttons */}
+                    <div className="pt-2 space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleCreateCollaborativeChallenge();
+                          window.alert("Initializing Tujengane Escrow... Validating odds, freezing stakes, creating smart contract and generating escrow ID...");
+                        }}
+                        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[11px] font-black py-3 rounded-xl shadow-lg shadow-blue-500/20 transition-all cursor-pointer transform hover:scale-[1.01]"
+                      >
+                        🚀 Initialize Tujengane Escrow
+                      </button>
+                      <div className="flex gap-2">
+                        <button type="button" onClick={() => window.alert("Opening full PDF Escrow Contract with AI explanations of returns and rules...")} className="flex-1 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-gray-300 text-[10px] font-bold py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer">
+                          Preview Contract
+                        </button>
+                        <button type="button" onClick={() => window.alert("Incomplete Tujengane saved to drafts safely. It will auto-save every 30 seconds.")} className="flex-1 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-700 dark:text-gray-300 text-[10px] font-bold py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer">
+                          Save Draft
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                ) : (
+                  <div className="p-6 bg-gray-50/50 dark:bg-zinc-800/10 rounded-2xl border border-dashed border-gray-300 dark:border-zinc-700 text-[11px] text-gray-500 text-center leading-relaxed flex flex-col items-center gap-3">
+                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center text-xl">
+                      🤝
+                    </div>
+                    <div>
+                      <strong className="text-gray-900 dark:text-gray-300 block mb-1">Welcome to Tujengane AI Escrow</strong>
+                      Select any match decimal odd on the left to propose a brand new smart collaborative pool powered by Nyota.
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : escrowEngineTab === "mimi" ? (
+              ratioOddValue > 0 ? (
+                <div className="space-y-4 animate-in fade-in duration-200 text-left">
+                  {/* Match Card */}
+                  <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm relative overflow-hidden">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <div className="flex items-center gap-1.5 text-[9px] font-bold text-gray-500 mb-1">
+                          <span className="w-4 h-4 bg-gray-100 dark:bg-zinc-800 rounded-full flex items-center justify-center text-[8px]">⚽</span>
+                          {ratioMatch?.league || "Premier League"}
+                        </div>
+                        <h3 className="text-sm font-black text-gray-900 dark:text-white leading-tight">
+                          {ratioMatch?.homeTeam} <span className="text-gray-400 font-normal">vs</span> {ratioMatch?.awayTeam}
+                        </h3>
+                        <p className="text-[9px] text-gray-500 mt-0.5">Sat, 19 May 2025 • 07:30 PM</p>
+                      </div>
+                      <div className="text-right bg-gray-50 dark:bg-zinc-800 p-1.5 rounded-lg border border-gray-100 dark:border-zinc-700">
+                        <span className="block text-[8px] font-bold text-gray-500 mb-0.5">Kickoff in</span>
+                        <div className="flex gap-1 text-[10px] font-black font-mono text-gray-800 dark:text-gray-200">
+                           <span>02<span className="text-[7px] text-gray-400 font-sans ml-0.5">HRS</span></span>
+                           <span>:</span>
+                           <span>14<span className="text-[7px] text-gray-400 font-sans ml-0.5">MIN</span></span>
+                           <span>:</span>
+                           <span>36<span className="text-[7px] text-gray-400 font-sans ml-0.5">SEC</span></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex border-t border-gray-100 dark:border-zinc-800 pt-2 mt-1 divide-x divide-gray-100 dark:divide-zinc-800">
+                       <div className="flex-1 text-center">
+                         <span className="block text-[8px] text-blue-600 dark:text-blue-400 font-bold mb-0.5">Your Pick</span>
+                         <span className="text-xs font-black text-blue-700 dark:text-blue-500">{ratioOddName}</span>
+                       </div>
+                       <div className="flex-1 text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Odds</span>
+                         <span className="text-xs font-black text-gray-900 dark:text-white">@ {ratioOddValue.toFixed(2)}</span>
+                       </div>
+                       <div className="flex-1 text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Risk Level</span>
+                         <span className="text-xs font-black text-amber-500">High ❓</span>
+                       </div>
+                    </div>
+                  </div>
+
+                  {/* Contract Summary */}
+                  <div className="bg-white dark:bg-[#18191a] p-3 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm ">
+                    <h3 className="text-[10px] font-black flex items-center gap-1.5 text-gray-800 dark:text-white mb-3">
+                       <span className="text-blue-500">📋</span> Contract Summary
+                    </h3>
+                    <div className="grid grid-cols-4 gap-2 mb-3">
+                      <div className="text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Total Amount</span>
+                         <span className="text-xs font-black text-blue-600 dark:text-blue-400">${ratioTotalPool.toFixed(2)}</span>
+                      </div>
+                      <div className="text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Your Share</span>
+                         <span className="text-xs font-black text-blue-600 dark:text-blue-400">${getCreatorStake().toFixed(2)}</span>
+                      </div>
+                      <div className="text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Opponent Share</span>
+                         <span className="text-xs font-black text-rose-500">${(ratioTotalPool - getCreatorStake()).toFixed(2)}</span>
+                      </div>
+                      <div className="text-center">
+                         <span className="block text-[8px] text-gray-500 font-bold mb-0.5">Escrow Fee (2%)</span>
+                         <span className="text-xs font-black text-gray-900 dark:text-white">${(ratioTotalPool * 0.02).toFixed(2)}</span>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 p-2 rounded-lg border border-gray-100 dark:border-zinc-700">
+                       <div className="flex items-center gap-1.5">
+                         <span className="text-[10px]">
+                           {escrowLiveStatus === "Waiting for Opponent" && "🔍"}
+                           {escrowLiveStatus === "Opponent Found" && "🟢"}
+                           {escrowLiveStatus === "Escrow Locked" && "🔒"}
+                           {escrowLiveStatus === "Match In Progress" && "⚽"}
+                           {escrowLiveStatus === "Settled" && "🏆"}
+                         </span>
+                         <span className="text-[9px] font-bold text-gray-600 dark:text-gray-400">
+                           Status:{" "}
+                           <span className={`font-black ${
+                             escrowLiveStatus === "Waiting for Opponent" ? "text-blue-600 dark:text-blue-400" :
+                             escrowLiveStatus === "Opponent Found" ? "text-emerald-500" :
+                             escrowLiveStatus === "Escrow Locked" ? "text-amber-500" :
+                             escrowLiveStatus === "Match In Progress" ? "text-indigo-500 animate-pulse" :
+                             "text-emerald-600 dark:text-emerald-400"
+                           }`}>
+                             {escrowLiveStatus}
+                           </span>
+                         </span>
+                       </div>
+                       <span className="text-[9px] font-bold text-gray-600 dark:text-gray-400">
+                         Escrow Lock Value: ${getCentralCalculation().escrowLockValue.toFixed(2)} ℹ️
+                       </span>
+                    </div>
+                  </div>
+
+                  {/* Live Escrow Calculator */}
+                  <div className="bg-gradient-to-br from-blue-50/40 to-indigo-50/40 dark:from-zinc-900/40 dark:to-blue-950/10 p-4 rounded-2xl border border-blue-100/80 dark:border-blue-900/20 shadow-sm space-y-4">
+                    <div className="flex justify-between items-center border-b border-blue-100/50 dark:border-blue-900/20 pb-2">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm">🧮</span>
+                        <h3 className="text-[11px] font-black uppercase text-blue-800 dark:text-blue-400 tracking-wider">
+                          Live Escrow Calculator
+                        </h3>
+                      </div>
+                      <span className="text-[7px] font-bold text-blue-500 bg-blue-100/60 dark:bg-blue-900/30 px-1.5 py-0.5 rounded uppercase">
+                        {escrowEngineTab === "mimi" ? "1v1 Mimi na Wewe" : escrowEngineTab === "three_way" ? "3-Way Challenge" : "Tujengane Group"}
+                      </span>
+                    </div>
+
+                    {/* Mode Toggle Tabs: Stake Mode vs Contract Mode */}
+                    {escrowEngineTab !== "mimi" && (
+                      <div className="flex bg-gray-100 dark:bg-zinc-800/80 p-0.5 rounded-lg border border-gray-200/50 dark:border-zinc-700/50 text-[10px]">
+                        <button
+                          type="button"
+                          onClick={() => setCalculatorMode("stake")}
+                          className={`flex-1 py-1 rounded-md font-bold transition-all ${
+                            calculatorMode === "stake"
+                              ? "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 shadow-sm"
+                              : "text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                          }`}
+                        >
+                          ⚡ Stake Mode (Default)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCalculatorMode("contract")}
+                          className={`flex-1 py-1 rounded-md font-bold transition-all ${
+                            calculatorMode === "contract"
+                              ? "bg-white dark:bg-zinc-900 text-blue-600 dark:text-blue-400 shadow-sm"
+                              : "text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                          }`}
+                        >
+                          📜 Contract Mode (Optional)
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Central Inputs Section */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white dark:bg-zinc-900/60 p-3 rounded-xl border border-gray-100 dark:border-zinc-800/60">
+                      <div>
+                        {calculatorMode === "stake" ? (
+                          <>
+                            <label className="text-[8px] text-gray-500 font-bold uppercase block mb-1">
+                              Your Stake ($) <span className="text-[7px] text-blue-500 font-normal">(Primary Input)</span>
+                            </label>
+                            <div className="relative">
+                              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">$</span>
+                              <input
+                                type="number"
+                                min="1"
+                                value={calculatorUserStakeInput}
+                                onChange={(e) => {
+                                  const val = Math.max(1, parseFloat(e.target.value) || 0);
+                                  setCalculatorUserStakeInput(val);
+                                }}
+                                className="w-full bg-gray-50 dark:bg-zinc-950/50 border border-gray-200 dark:border-zinc-800 rounded-lg py-1.5 pl-6 pr-2 font-mono font-bold text-xs text-gray-900 dark:text-white outline-none focus:border-blue-500 transition-colors"
+                              />
+                            </div>
+                            <input
+                              type="range"
+                              min="5"
+                              max="500"
+                              step="5"
+                              value={calculatorUserStakeInput}
+                              onChange={(e) => {
+                                const val = parseFloat(e.target.value);
+                                setCalculatorUserStakeInput(val);
+                              }}
+                              className="w-full h-1 bg-gray-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-2"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <label className="text-[8px] text-gray-500 font-bold uppercase block mb-1">
+                              Contract Value ($) <span className="text-[7px] text-blue-500 font-normal">(Primary Input)</span>
+                            </label>
+                            <div className="relative">
+                              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">$</span>
+                              <input
+                                type="number"
+                                min="1"
+                                value={escrowEngineTab === "tujengane" ? collabTargetStake : ratioTotalPool}
+                                onChange={(e) => {
+                                  const val = Math.max(1, parseFloat(e.target.value) || 0);
+                                  if (escrowEngineTab === "tujengane") {
+                                    setCollabTargetStake(val);
+                                    setRatioTotalPool(val);
+                                  } else {
+                                    setRatioTotalPool(val);
+                                    setCollabTargetStake(val);
+                                  }
+                                }}
+                                className="w-full bg-gray-50 dark:bg-zinc-950/50 border border-gray-200 dark:border-zinc-800 rounded-lg py-1.5 pl-6 pr-2 font-mono font-bold text-xs text-gray-900 dark:text-white outline-none focus:border-blue-500 transition-colors"
+                              />
+                            </div>
+                            <input
+                              type="range"
+                              min="10"
+                              max="1000"
+                              step="10"
+                              value={escrowEngineTab === "tujengane" ? collabTargetStake : ratioTotalPool}
+                              onChange={(e) => {
+                                const val = parseFloat(e.target.value);
+                                if (escrowEngineTab === "tujengane") {
+                                  setCollabTargetStake(val);
+                                  setRatioTotalPool(val);
+                                } else {
+                                  setRatioTotalPool(val);
+                                  setCollabTargetStake(val);
+                                }
+                              }}
+                              className="w-full h-1 bg-gray-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-2"
+                            />
+                          </>
+                        )}
+                      </div>
+
+                      <div className="space-y-1.5 flex flex-col justify-center">
+                        <div className="flex justify-between items-center text-[9px]">
+                          <span className="text-gray-500 font-bold uppercase">Calculated Contract Value:</span>
+                          <span className="font-mono font-black text-blue-600 dark:text-blue-400">
+                            ${getCentralCalculation().contractValue.toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center text-[9px]">
+                          <span className="text-gray-500 font-bold uppercase">Active Odds:</span>
+                          <span className="font-mono font-black text-gray-800 dark:text-gray-200">
+                            @{getCentralCalculation().userOdds.toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center text-[9px]">
+                          <span className="text-gray-500 font-bold uppercase">Opponent Odds:</span>
+                          <span className="font-mono font-black text-gray-800 dark:text-gray-200">
+                            @{getCentralCalculation().opponentOdds.toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center text-[9px]">
+                          <span className="text-gray-500 font-bold uppercase">Match Selected:</span>
+                          <span className="font-semibold text-gray-700 dark:text-gray-300 truncate max-w-[120px]">
+                            {ratioMatch ? `${ratioMatch.homeTeam} vs ${ratioMatch.awayTeam}` : "No Match Selected"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Peer-to-Peer Stakes Table */}
+                    <div className="overflow-x-auto rounded-xl border border-gray-150 dark:border-zinc-800">
+                      <table className="w-full text-[9px] text-left border-collapse bg-white dark:bg-zinc-900/40">
+                        <thead>
+                          <tr className="bg-gray-50 dark:bg-zinc-800/60 border-b border-gray-150 dark:border-zinc-800 text-gray-600 dark:text-gray-400 font-bold uppercase">
+                            <th className="p-2">Side / Player</th>
+                            <th className="p-2 text-center">Stake %</th>
+                            <th className="p-2 text-center">Stake ($)</th>
+                            <th className="p-2 text-center">Est. Return ($)</th>
+                            <th className="p-2 text-center text-blue-600 dark:text-blue-400">Net Profit ($)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 dark:divide-zinc-800 text-gray-700 dark:text-gray-300">
+                          {escrowEngineTab === "three_way" ? (
+                            <>
+                              <tr>
+                                <td className="p-2 font-black text-blue-600 dark:text-blue-400">
+                                  Player 1 (You)
+                                </td>
+                                <td className="p-2 text-center font-semibold font-mono">
+                                  {getCentralCalculation().player1Pct?.toFixed(1)}%
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player1Stake?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player1Return?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-black font-mono text-emerald-600 dark:text-emerald-400">
+                                  +${getCentralCalculation().player1Profit?.toFixed(2)}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="p-2 font-semibold text-rose-500">
+                                  Player 2 (Opponent A)
+                                </td>
+                                <td className="p-2 text-center font-semibold font-mono">
+                                  {getCentralCalculation().player2Pct?.toFixed(1)}%
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player2Stake?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player2Return?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-black font-mono text-emerald-600 dark:text-emerald-400">
+                                  +${getCentralCalculation().player2Profit?.toFixed(2)}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="p-2 font-semibold text-amber-500">
+                                  Player 3 (Opponent B)
+                                </td>
+                                <td className="p-2 text-center font-semibold font-mono">
+                                  {getCentralCalculation().player3Pct?.toFixed(1)}%
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player3Stake?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().player3Return?.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-black font-mono text-emerald-600 dark:text-emerald-400">
+                                  +${getCentralCalculation().player3Profit?.toFixed(2)}
+                                </td>
+                              </tr>
+                            </>
+                          ) : (
+                            <>
+                              <tr>
+                                <td className="p-2 font-black text-blue-600 dark:text-blue-400">
+                                  Your Side (You)
+                                </td>
+                                <td className="p-2 text-center font-semibold font-mono">
+                                  {getCentralCalculation().userPct.toFixed(1)}%
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().userStake.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-bold font-mono">
+                                  ${getCentralCalculation().userReturn.toFixed(2)}
+                                </td>
+                                <td className="p-2 text-center font-black font-mono text-emerald-600 dark:text-emerald-400">

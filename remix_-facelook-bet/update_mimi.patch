@@ -1,0 +1,228 @@
+--- src/App.tsx
++++ src/App.tsx
+@@ -6341,257 +6341,189 @@
+             ) : (
+               ratioOddValue > 0 ? (
+-                <div className="space-y-4 animate-in fade-in duration-200">
+-                  
+-                  {/* Selected match card */}
+-                  {ratioMatch && (
+-                    <div className="p-3 bg-blue-50/70 dark:bg-zinc-800/40 rounded-xl border border-dashed border-blue-200 dark:border-zinc-700 text-xs text-left">
+-                      <span className="block text-[8px] uppercase font-mono tracking-widest font-black text-gray-400 dark:text-gray-500 mb-1">
+-                        Target Match & Prediction Option Selected
+-                      </span>
+-                      <div className="font-extrabold text-[#1877f2] dark:text-blue-400 text-xs leading-tight mb-0.5 truncate">
+-                        🏟️ {ratioMatch.homeTeam} vs {ratioMatch.awayTeam}
+-                      </div>
+-                      <div className="text-[10.5px] font-bold text-gray-700 dark:text-gray-300">
+-                        Prediction: <span className="text-emerald-500">{ratioOddName}</span> (@{ratioOddValue.toFixed(2)})
+-                      </div>
+-                    </div>
+-                  )}
+-
+-                  {/* Total Challenge Pool budget */}
+-                  <div className="space-y-3">
+-                    <div className="text-left">
+-                      <label className="block text-[9px] text-gray-400 font-bold uppercase mb-1">Total Pool size ($)</label>
+-                      <input
+-                        type="number"
+-                        value={ratioTotalPool}
+-                        onChange={(e) => setRatioTotalPool(Math.max(1, parseInt(e.target.value) || 0))}
+-                        className="w-full bg-gray-50 dark:bg-[#18191a] border border-gray-200 dark:border-zinc-800 rounded-lg p-2 font-black font-mono text-center text-gray-900 dark:text-white outline-none focus:ring-1 focus:ring-blue-500"
+-                      />
+-                    </div>
+-                    <div className="text-left">
+-                      <label className="block text-[9px] text-gray-400 font-bold uppercase mb-1">No. of Opponents</label>
+-                      <div className="grid grid-cols-2 gap-1.5 text-[9.5px] font-bold">
+-                        <button
+-                          type="button"
+-                          onClick={() => setNumOpponents(1)}
+-                          className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
+-                            numOpponents === 1
+-                              ? "bg-blue-600 border-blue-600 text-white"
+-                              : "bg-gray-50 dark:bg-[#18191a] border-gray-200 dark:border-zinc-805 text-gray-600 dark:text-gray-400 hover:bg-gray-100"
+-                          }`}
+-                        >
+-                          1v1 Mode
+-                        </button>
+-                        <button
+-                          type="button"
+-                          onClick={() => setNumOpponents(2)}
+-                          className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
+-                            numOpponents === 2
+-                              ? "bg-indigo-600 border-indigo-600 text-white"
+-                              : "bg-gray-50 dark:bg-[#18191a] border-gray-200 dark:border-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100"
+-                          }`}
+-                        >
+-                          3-Way Mode
+-                        </button>
+-                      </div>
+-                    </div>
+-                  </div>
+-
+-                  {/* Target Market constraint */}
+-                  {numOpponents === 1 && (
+-                    <div className="text-left space-y-2">
+-                      <label className="block text-[9px] uppercase font-mono tracking-wider font-extrabold text-gray-450 mb-1">
+-                        Challenge Target Mode
+-                      </label>
+-                      <div className="grid grid-cols-2 gap-1.5 text-[9.5px] font-bold">
+-                        <button
+-                          type="button"
+-                          onClick={() => setChallengeTargetMode("proposed")}
+-                          className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
+-                            challengeTargetMode === "proposed"
+-                              ? "bg-amber-600 border-amber-600 text-white"
+-                              : "bg-gray-50 dark:bg-[#18191a] border-gray-200 dark:border-zinc-800 text-gray-770 dark:text-gray-400 hover:bg-gray-100"
+-                          }`}
+-                        >
+-                          🔒 Proposed Market
+-                        </button>
+-                        <button
+-                          type="button"
+-                          onClick={() => setChallengeTargetMode("op")}
+-                          className={`py-2 rounded-lg border text-center transition-all cursor-pointer ${
+-                            challengeTargetMode === "op"
+-                              ? "bg-indigo-650 border-indigo-650 text-white"
+-                              : "bg-gray-50 dark:bg-[#18191a] border-gray-200 dark:border-zinc-800 text-gray-770 dark:text-gray-400 hover:bg-gray-100"
+-                          }`}
+-                        >
+-                          ⚡ OP (Open Prop)
+-                        </button>
+-                      </div>
+-                      <p className="text-[9px] text-gray-400 leading-normal mt-1">
+-                        {challengeTargetMode === "proposed" 
+-                          ? "🔒 Proposer Choice is forced. Opponent must accept assigned selection." 
+-                          : "⚡ Open Proposition choice. Opponent can choose their own selection."}
+-                      </p>
+-                    </div>
+-                  )}
+-
+-                  {numOpponents === 2 && (
+-                    <div className="text-left space-y-2">
+-                      <label className="block text-[9px] uppercase font-mono tracking-wider font-extrabold text-gray-450 mb-1">
+-                        Challenge Target Mode
+-                      </label>
+-                      <label className="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-gray-200 dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+-                        <input 
+-                          type="checkbox" 
+-                          checked={isWaitingMode} 
+-                          onChange={(e) => setIsWaitingMode(e.target.checked)}
+-                          className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 bg-gray-100 border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 cursor-pointer"
+-                        />
+-                        <span className="text-sm font-bold text-gray-800 dark:text-gray-200 select-none">
+-                          ⏳ Enable Waiting Mode
+-                        </span>
+-                      </label>
+-                      <p className="text-[9px] text-gray-400 leading-normal mt-1">
+-                        {isWaitingMode 
+-                          ? "⏳ Post to your feed. When the first opponent joins, it moves automatically to Active Challengers global pool."
+-                          : "👥 Disabled Waiting Mode. You can directly browse and join Active Challengers."}
+-                      </p>
+-                    </div>
+-                  )}
+-
+-                  {/* Rules & Banter comment input */}
+-                  <div className="text-left">
+-                    <label className="block text-[9px] uppercase font-mono tracking-wider font-extrabold text-gray-400 mb-1">
+-                      Banter & Specific Challenge Rules
+-                    </label>
+-                    <textarea
+-                      value={composerText}
+-                      onChange={(e) => setComposerText(e.target.value)}
+-                      placeholder="e.g. Backing my prediction, winner takes all the escrow!"
+-                      className="w-full bg-gray-50 dark:bg-[#18191a] text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-800 rounded-lg p-2 text-xs outline-none focus:ring-1 focus:ring-blue-500 max-h-20 resize-none"
+-                    />
+-                  </div>
+-
+-                  {/* Stakes Split Readout directly calculated from same engine states */}
+-                  <div className="bg-blue-50 dark:bg-blue-950/25 p-3 rounded-lg border border-blue-105 dark:border-blue-900/30 text-left space-y-1.5 font-mono text-xs">
+-                    <div className="flex justify-between font-extrabold border-b border-blue-200/40 pb-1 mb-1 text-blue-700 dark:text-blue-300">
+-                      <span>You ({calculateLookuptoStakes().userSelectionName}):</span>
+-                      <span>{calculateLookuptoStakes().userPct.toFixed(1)}% = ${getCreatorStake().toFixed(2)}</span>
+-                    </div>
+-                    {calculateLookuptoStakes().opponents.map((opp, idx) => (
+-                      <div key={idx} className="flex justify-between text-gray-700 dark:text-gray-300">
+-                        <span>{opp.name} ({opp.selectionName}):</span>
+-                        <span>{opp.pct.toFixed(1)}% = ${opp.stake.toFixed(2)}</span>
+-                      </div>
+-                    ))}
+-                    {!(numOpponents === 2 && isWaitingMode) && isSendoffEnabled && (
+-                      <div className="flex justify-between font-bold text-purple-600 dark:text-purple-400 border-t border-dashed border-gray-200 dark:border-zinc-800 pt-1.5">
+-                        <span>📣 Sendoff Spot (1%):</span>
+-                        <span>${(ratioTotalPool * 0.01).toFixed(2)}</span>
+-                      </div>
+-                    )}
+-                    <div className="flex justify-between font-bold text-amber-600 dark:text-amber-500 border-t border-dashed border-gray-200 dark:border-zinc-800 pt-1.5 mt-1.5">
+-                      <span>🏛️ Org. Escrow Tax (2% upon full hold):</span>
+-                      <span>${(ratioTotalPool * 0.02).toFixed(2)}</span>
+-                    </div>
+-                    <div className="flex justify-between font-bold text-gray-500 dark:text-gray-400 border-t border-dashed border-gray-200 dark:border-zinc-800 pt-1">
+-                      <span>Challenge Type:</span>
+-                      <span className={numOpponents === 2 ? "text-indigo-600 dark:text-indigo-400 font-extrabold" : (challengeTargetMode === "proposed" ? "text-amber-600 dark:text-amber-500 font-extrabold" : "text-indigo-600 dark:text-indigo-400 font-extrabold")}>
+-                        {numOpponents === 2 ? (isWaitingMode ? "⏳ Waiting Mode (3-Way Split)" : "👥 Join Active Challenge (3-Way Split)") : (challengeTargetMode === "proposed" ? "🔒 Proposed" : "⚡ OP (Open Prop)")}
+-                      </span>
+-                    </div>
+-                    <div className="pt-1.5 border-t border-gray-150 dark:border-zinc-850 flex justify-between font-black text-gray-800 dark:text-gray-100">
+-                      <span>Escrow Lock Value:</span>
+-                      <span>${ratioTotalPool.toFixed(2)}</span>
+-                    </div>
+-                  </div>
+-
+-                  {/* Sponsor Peer Sendoffs Option */}
+-                  <div className="space-y-2.5 bg-gray-50/50 dark:bg-zinc-800/10 p-3 rounded-xl border border-gray-200 dark:border-zinc-800 text-left">
+-                    <div className="flex items-center justify-between">
+-                      <label className="text-[10px] uppercase font-mono tracking-wider font-extrabold text-gray-455 cursor-pointer" htmlFor="sidebar-sendoff-cb">
+-                        Sponsor Sendoff Spots
+-                      </label>
+-                      <input 
+-                        id="sidebar-sendoff-cb"
+-                        type="checkbox" 
+-                        checked={isSendoffEnabled} 
+-                        onChange={(e) => setIsSendoffEnabled(e.target.checked)}
+-                        className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 bg-gray-100 border-gray-300 dark:bg-zinc-700 dark:border-zinc-600 cursor-pointer"
+-                      />
+-                    </div>
+-                    <p className="text-[9.5px] text-gray-400 leading-snug">
+-                      Allocate 1% of the Escrow lock to the global Feed <strong>Sendoff Drop</strong>. Friends engaging with your slip gain small reputation tips. High community priority ranking.
+-                    </p>
+-                  </div>
+-
+-                  {/* Post & Init Actions */}
+-                  <div className="pt-2">
+-                    <button
+-                      type="button"
+-                      onClick={() => window.alert("Locking Escrow rules, verifying odds availability in liquidity, processing wallet stake, and posting to lookUpto global timeline...")}
+-                      className="w-full bg-gradient-to-r from-blue-600 to-[#1877f2] hover:from-blue-700 hover:to-[#1877f2] text-white text-[11px] font-black py-3 rounded-xl shadow-md transition-all cursor-pointer mb-2 transform hover:scale-[1.01]"
+-                    >
+-                      🔒 Initialize Escrow & Post to Feed
+-                    </button>
+-                    <div className="grid grid-cols-2 gap-2">
+-                      <button
+-                        type="button"
+-                        onClick={() => window.alert("Saving draft. Will be preserved across devices.")}
+-                        className="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700 text-gray-700 dark:text-gray-300 text-[10px] font-bold py-2 rounded-xl transition-colors cursor-pointer"
+-                      >
+-                        Save as Draft
+-                      </button>
+-                      <button
+-                        type="button"
+-                        onClick={() => window.alert("Copying deep-link to clipboard...")}
+-                        className="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700 text-gray-700 dark:text-gray-300 text-[10px] font-bold py-2 rounded-xl transition-colors cursor-pointer flex justify-center items-center gap-1"
+-                      >
+-                        <span>🔗</span> Copy Link
+-                      </button>
+-                    </div>
+-                  </div>
+-
+-                </div>
+-              ) : (
+-                <div className="flex flex-col items-center justify-center h-48 text-gray-400 dark:text-gray-500 border-2 border-dashed border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50/50 dark:bg-[#242526]">
+-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+-                  </svg>
+-                  <p className="text-xs font-bold font-sans">Select any prediction from</p>
+-                  <p className="text-xs font-bold font-sans">the feed or explorer.</p>
+-                </div>
+-              )
+-            )}
